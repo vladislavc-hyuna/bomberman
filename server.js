@@ -33,6 +33,9 @@ io.on('connection', function(socket){
 
 	socket.on('move', function(data){
 		var player = getPlayerByID(socket.id);
+
+		var min_x = 0, min_y = 0, max_x=840, max_y=840;
+
 		if(data.direction == 'up'){
 			player.y -= 40;
 		}else if(data.direction == 'down'){
