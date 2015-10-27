@@ -1,12 +1,13 @@
-var player = {
-	name : null,
-	image: null
-};
+function Player()
+{
+	this.name = null;
+	this.image = null;
+}
 
-player.move = function() {
+Player.prototype.move = function() {
 
 }
 
-player.die = function() {
+Player.prototype.die = function() {
 	delete this;
 }
