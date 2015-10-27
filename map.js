@@ -11,6 +11,16 @@ Map.prototype.buildOverlay = function() {
 	this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
+Map.prototype.checkObject = function(x,y) {
+	return this.objects.find(function(element, index, array) {
+		if(array[index][0] == x && array[index][1] == y) {
+			return true;
+		}else {
+			return false
+		}
+	});
+}
+
 Map.prototype.buildWalls = function() {
 	 this.map = [];
 
@@ -23,7 +33,10 @@ Map.prototype.buildWalls = function() {
 	 		var start_x = 40;
 		 	for (var j = 1; j <= elements_y; j++) {
 		 		if( (j%2 != 0 || j == 1 ) && j!=20) {
-		 			this.objects.push([start_x,start_y]);
+		 			var wall = new Wall();
+		 			wall.setCoords(start_x, start_y)
+		 			this.objects.push(wall);
+		 			this.ctx.fillStyle = wall.color;
 		 			this.ctx.fillRect( start_x,  start_y, this.elWidth, this.elWidth);
 		 		}
 		 	 	start_x+=40;
@@ -33,7 +46,12 @@ Map.prototype.buildWalls = function() {
 	}
 }
 
+Map.prototype.buildBricks = function() {
+
+}
+
 Map.prototype.init = function() {
 	this.buildOverlay();
 	this.buildWalls();
+	console.log(this.objects);
 }
