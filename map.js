@@ -13,7 +13,9 @@ Map.prototype.buildOverlay = function() {
 
 Map.prototype.checkObject = function(x,y) {
 	return this.objects.find(function(element, index, array) {
-		if(array[index][0] == x && array[index][1] == y) {
+		var wallCoords = array[index].getCoords();
+
+		if( wallCoords[0] == x && wallCoords[1] == y) {
 			return true;
 		}else {
 			return false
@@ -33,8 +35,10 @@ Map.prototype.buildWalls = function() {
 	 		var start_x = 40;
 		 	for (var j = 1; j <= elements_y; j++) {
 		 		if( (j%2 != 0 || j == 1 ) && j!=20) {
+
 		 			var wall = new Wall();
-		 			wall.setCoords(start_x, start_y)
+		 			wall.setCoords(start_x, start_y);
+
 		 			this.objects.push(wall);
 		 			this.ctx.fillStyle = wall.color;
 		 			this.ctx.fillRect( start_x,  start_y, this.elWidth, this.elWidth);
